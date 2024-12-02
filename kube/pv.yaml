@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: hellz-pv
+spec:
+  capacity:
+    storage: 1Gi
+  accessModes:
+  - ReadWriteOnce
+  storageClassName: hostpath
+  hostPath:
+#    path: /run/desktop/mnt/host/c/repo/Kubernetes/data
+    path: /var/lib/docker/volumes/hellz-volume/_data
+    type: DirectoryOrCreate

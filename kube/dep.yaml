@@ -1,0 +1,44 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: hellz-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: hellz-app
+  template:
+    metadata:
+      labels:
+        app: hellz-app
+    spec:
+      initContainers:
+      - name: volume-permissions
+        image: busybox
+        command: ["sh", "-c", "chmod -R 777 /app/data"]
+        volumeMounts:
+        - name: hellz-storage
+          mountPath: /app/data
+      containers:
+      - name: hellz-app
+        image: senceck/kube_test:latest
+        ports:
+        - containerPort: 8000
+        env:
+        - name: MY_SECRET_KEY
+          valueFrom:
+            secretKeyRef:
+              name: my-secret
+              key: MY_SECRET_KEY
+        - name: MY_CONFIG_MAP
+          valueFrom:
+            configMapKeyRef:
+              name: my-config
+              key: MY_CONFIG_MAP
+        volumeMounts:
+        - name: hellz-storage
+          mountPath: /app/data # Directory inside the container
+      volumes:
+      - name: hellz-storage
+        persistentVolumeClaim:
+          claimName: hellz-pvc
