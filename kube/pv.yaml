@@ -10,5 +10,6 @@ spec:
   storageClassName: hostpath
   hostPath:
 #    path: /run/desktop/mnt/host/c/repo/Kubernetes/data
-    path: /var/lib/docker/volumes/hellz-volume/_data
+#    path: /var/lib/docker/volumes/hellz-volume/_data
+    path: /run/desktop/mnt/host/c/Users/ISAC/data
     type: DirectoryOrCreate
