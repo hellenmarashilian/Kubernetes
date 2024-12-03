@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: hellz-pv
+spec:
+  capacity:
+    storage: 1Gi
+  accessModes:
+  - ReadWriteMany
+  persistentVolumeReclaimPolicy: Retain
+  storageClassName: hostpath
+  nfs:
+    server: 192.168.176.1  # Replace with 'host.docker.internal' if preferred
+    path: /C/Users/ISAC/data  # This matches your NFS server export
