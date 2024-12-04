@@ -12,3 +12,5 @@ spec:
   nfs:
     server: 192.168.176.1  # Replace with 'host.docker.internal' if preferred
     path: /C/Users/ISAC/data  # This matches your NFS server export
+
+    # nfs server link https://sourceforge.net/projects/nfs-server/
